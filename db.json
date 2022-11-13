@@ -1,0 +1,9 @@
+{
+  "data": [
+    { "keyword": "AEM", "definition": "Adobe Experience Manager" },
+    { "keyword": "ERP", "definition": "Enterprise Resource Planning" },
+    { "keyword": "P&A", "definition": "Product and Availability" },
+    { "keyword": "PDP", "definition": "Product Detail Page" },
+    { "keyword": "SRP", "definition": "Search Results Page" }
+  ]
+}

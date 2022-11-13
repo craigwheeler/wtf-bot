@@ -1,7 +1,9 @@
 const { App } = require("@slack/bolt");
 require("dotenv").config();
 
-console.log("APP_TOKEN: ", process.env.APP_TOKEN);
+const fs = require("fs");
+let db = fs.readFileSync("db.json");
+let { data } = JSON.parse(db);
 
 const app = new App({
   token: process.env.BOT_USER_OAUTH_TOKEN,
@@ -13,13 +15,21 @@ const app = new App({
 app.command("/wtf", async ({ command, ack, say }) => {
   try {
     await ack();
-    say("Hello World!");
+    const acronym = data.filter(
+      ({ keyword }) => keyword.toLowerCase() === command.text.toLowerCase()
+    );
+
+    if (acronym.length > 0) {
+      say(acronym[0].definition);
+    } else {
+      say("No definition found!");
+    }
   } catch (error) {
-    console.log("error", error);
+    console.error(error);
   }
 });
 
 (async () => {
   await app.start(process.env.PORT);
-  console.log(`⚡️ Slack Bolt app is running on port ${process.env.PORT}!`);
+  console.log(`⚡️ Slack app is running on port ${process.env.PORT}!`);
 })();
