@@ -20,9 +20,9 @@ app.command("/wtf", async ({ command, ack, say }) => {
     );
 
     if (acronym.length > 0) {
-      say(acronym[0].definition);
+      say(`${acronym[0].keyword} stands for "${acronym[0].definition}"`);
     } else {
-      say("No definition found!");
+      say(`No definition found for "${command.text}" :shrug:`);
     }
   } catch (error) {
     console.error(error);
